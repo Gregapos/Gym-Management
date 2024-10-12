@@ -1,0 +1,10 @@
+# Ignore vscode folders
+.vscode/
+**/.vs/
+
+# Ignore bin and obj folders
+**/bin/
+**/obj/
+
+# Ignore .prettierrc file
+.prettierrc
