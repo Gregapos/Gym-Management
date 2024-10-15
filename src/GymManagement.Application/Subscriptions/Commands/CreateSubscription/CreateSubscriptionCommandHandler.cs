@@ -1,13 +1,28 @@
 using ErrorOr;
+using GymManagement.Application.Common.Interfaces;
+using GymManagement.Domain.Subscriptions;
 using MediatR;
 
 namespace GymManagement.Application.Subscriptions.Commands.CreateSubscriptionCommand;
 
-public class CreateSubscriptionCommandHandler : IRequestHandler<CreateSubscriptionCommand, ErrorOr<Guid>>
+public class CreateSubscriptionCommandHandler : IRequestHandler<CreateSubscriptionCommand, ErrorOr<Subscription>>
 {
-    public Task<ErrorOr<Guid>> Handle(CreateSubscriptionCommand request, CancellationToken cancellationToken)
+    private readonly ISubscriptionsRepository _subscriptionsRepository;
+
+    public CreateSubscriptionCommandHandler(ISubscriptionsRepository subscriptionsRepository)
     {
-        ErrorOr<Guid> result = Guid.NewGuid();
-        return Task.FromResult(result);
+        _subscriptionsRepository = subscriptionsRepository;
+    }
+
+    public Task<ErrorOr<Subscription>> Handle(CreateSubscriptionCommand request, CancellationToken cancellationToken)
+    {
+        var subscription = new Subscription
+        {
+            Id = Guid.NewGuid()
+        };
+
+        _subscriptionsRepository.AddSubscription(subscription);
+
+        return Task.FromResult<ErrorOr<Subscription>>(subscription);
     }
 }

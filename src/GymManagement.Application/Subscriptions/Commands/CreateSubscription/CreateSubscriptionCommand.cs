@@ -1,4 +1,5 @@
 using ErrorOr;
+using GymManagement.Domain.Subscriptions;
 using MediatR;
 
 namespace GymManagement.Application.Subscriptions.Commands.CreateSubscriptionCommand;
@@ -6,4 +7,4 @@ namespace GymManagement.Application.Subscriptions.Commands.CreateSubscriptionCom
 public record CreateSubscriptionCommand(
    string SubscriptionType,
    Guid AdminId
-) : IRequest<ErrorOr<Guid>>;
+) : IRequest<ErrorOr<Subscription>>;
