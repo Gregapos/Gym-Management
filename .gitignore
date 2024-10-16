@@ -8,3 +8,6 @@
 
 # Ignore .prettierrc file
 .prettierrc
+
+# Ignore DBs
+*.db
