@@ -11,3 +11,5 @@
 
 # Ignore DBs
 *.db
+*.db-shm
+*.db-wal
