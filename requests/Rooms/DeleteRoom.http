@@ -1,0 +1,2 @@
+DELETE {{host}}/gyms/{{gymId}}/rooms/{{roomId}}
+Authorization: Bearer {{token}}

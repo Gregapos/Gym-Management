@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using GymManagement.Application.Subscriptions.Commands.CreateSubscriptionCommand;
+using GymManagement.Application.Subscriptions.Commands.DeleteSubscription;
 using GymManagement.Application.Subscriptions.Queries.GetSubscription;
 using GymManagement.Contracts.Subscriptions;
 using MediatR;
@@ -37,9 +38,13 @@ public class SubscriptionsController : ControllerBase
         var createSubscriptionResult = await _mediator.Send(command);
 
         return createSubscriptionResult.MatchFirst(
-            subscription => Ok(new SubscriptionResponse(subscription.Id, request.SubscriptionType)),
-            error => Problem()
-         );
+            subscription => CreatedAtAction(
+                nameof(GetSubscription),
+                new { subscriptionId = subscription.Id },
+                new SubscriptionResponse(
+                    subscription.Id,
+                    ToDto(subscription.SubscriptionType))),
+            error => Problem());
     }
 
     [HttpGet("{subscriptionId:guid}")]
@@ -52,7 +57,30 @@ public class SubscriptionsController : ControllerBase
         return getSubscriptionsResult.MatchFirst(
             subscription => Ok(new SubscriptionResponse(
                 subscription.Id,
-                Enum.Parse<SubscriptionType>(subscription.SubscriptionType.Name))),
+                ToDto(subscription.SubscriptionType))),
             error => Problem());
+    }
+
+    [HttpDelete("{subscriptionId:guid}")]
+    public async Task<IActionResult> DeleteSubscription(Guid subscriptionId)
+    {
+        var command = new DeleteSubscriptionCommand(subscriptionId);
+
+        var createSubscriptionResult = await _mediator.Send(command);
+
+        return createSubscriptionResult.Match<IActionResult>(
+            _ => NoContent(),
+            _ => Problem());
+    }
+
+    private static SubscriptionType ToDto(DomainSubscriptionType subscriptionType)
+    {
+        return subscriptionType.Name switch
+        {
+            nameof(DomainSubscriptionType.Free) => SubscriptionType.Free,
+            nameof(DomainSubscriptionType.Starter) => SubscriptionType.Starter,
+            nameof(DomainSubscriptionType.Pro) => SubscriptionType.Pro,
+            _ => throw new InvalidOperationException(),
+        };
     }
 }

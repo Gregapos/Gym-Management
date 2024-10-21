@@ -1,4 +1,5 @@
 using GymManagement.Domain.Subscriptions;
+using GymManagement.Infrastructure.Common.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -12,8 +13,10 @@ public class SubscriptionConfiguration : IEntityTypeConfiguration<Subscription>
         builder.Property(s => s.Id)
             .ValueGeneratedNever(); //We generate it in the application
 
-        builder.Property("_adminId")
-            .HasColumnName("AdminId");
+        builder.Property("_maxGyms")
+           .HasColumnName("MaxGyms");
+
+        builder.Property(s => s.AdminId);
 
         //We have a specific conversion on the way in and out of the DB, because this is a smartEnum
         builder.Property(s => s.SubscriptionType)
@@ -21,5 +24,9 @@ public class SubscriptionConfiguration : IEntityTypeConfiguration<Subscription>
                 subscriptionType => subscriptionType.Value, //on the way in
                 value => SubscriptionType.FromValue(value) //on the way out
             );
+
+        builder.Property<List<Guid>>("_gymIds")
+            .HasColumnName("GymIds")
+            .HasListOfIdsConverter();
     }
 }
