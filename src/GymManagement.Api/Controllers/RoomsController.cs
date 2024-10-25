@@ -8,7 +8,7 @@ namespace GymManagement.Api.Controllers;
 
 [ApiController]
 [Route("gyms/{gymId:guid}/rooms")]
-public class RoomsController : ControllerBase
+public class RoomsController : ApiController
 {
     private readonly ISender _mediator;
 
@@ -32,7 +32,7 @@ public class RoomsController : ControllerBase
             room => Created(
                 $"rooms/{room.Id}", // todo: add host
                 new RoomResponse(room.Id, room.Name)),
-            _ => Problem());
+            Problem);
     }
 
     [HttpDelete("{roomId:guid}")]
@@ -46,6 +46,6 @@ public class RoomsController : ControllerBase
 
         return deleteRoomResult.Match<IActionResult>(
             _ => NoContent(),
-            _ => Problem());
+            Problem);
     }
 }
