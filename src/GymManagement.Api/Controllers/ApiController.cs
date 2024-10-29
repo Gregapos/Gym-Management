@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 namespace GymManagement.Api.Controllers;
 
 [ApiController]
+[Route("api/[controller]")]
 public class ApiController : ControllerBase
 {
 
