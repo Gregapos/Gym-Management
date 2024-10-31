@@ -1,4 +1,6 @@
 using ErrorOr;
+using FluentValidation;
+using GymManagement.Application.Common.Behaviors;
 using GymManagement.Application.Gyms.Commands.CreateGym;
 using GymManagement.Domain.Gyms;
 using MediatR;
@@ -13,10 +15,10 @@ public static class DependencyInjection
         services.AddMediatR(options =>
         {
             options.RegisterServicesFromAssemblyContaining(typeof(DependencyInjection));
-            options.AddBehavior<
-                IPipelineBehavior<CreateGymCommand, ErrorOr<Gym>>,
-                CreateGymCommandBehavior>();
+            options.AddOpenBehavior(typeof(ValidationBehavior<,>));
         });
+
+        services.AddValidatorsFromAssemblyContaining(typeof(DependencyInjection));
 
         return services;
     }
