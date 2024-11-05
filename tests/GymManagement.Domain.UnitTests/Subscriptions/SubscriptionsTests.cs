@@ -9,7 +9,7 @@ namespace GymManagement.Domain.UnitTests.Subscriptions;
 public class SubscriptionsTests
 {
     [Fact]
-    public void AddGymWhenMoreThanSubscriptionAllows_ShouldFail()
+    public void AddGym_WhenMoreThanSubscriptionAllows_ShouldFail()
     {
         // Arrange
         // Create a subscription
