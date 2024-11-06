@@ -1,5 +1,5 @@
 using System.ComponentModel;
-using GymManagement.Application.Subscriptions.Commands.CreateSubscriptionCommand;
+using GymManagement.Application.Subscriptions.Commands.CreateSubscription;
 using GymManagement.Application.Subscriptions.Commands.DeleteSubscription;
 using GymManagement.Application.Subscriptions.Queries.GetSubscription;
 using GymManagement.Contracts.Subscriptions;

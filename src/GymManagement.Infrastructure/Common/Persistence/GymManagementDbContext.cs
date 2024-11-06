@@ -4,6 +4,7 @@ using GymManagement.Domain.Admins;
 using GymManagement.Domain.Common;
 using GymManagement.Domain.Gyms;
 using GymManagement.Domain.Subscriptions;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,7 +12,8 @@ namespace GymManagement.Infrastructure.Common.Persistence
 {
     public class GymManagementDbContext(
         DbContextOptions options,
-        IHttpContextAccessor httpContextAccessor) : DbContext(options), IUnitOfWork
+        IHttpContextAccessor httpContextAccessor,
+        IPublisher _publisher) : DbContext(options), IUnitOfWork
     {
         public DbSet<Admin> Admins { get; set; } = null!;
         public DbSet<Subscription> Subscriptions { get; set; } = null!;
@@ -27,10 +29,28 @@ namespace GymManagement.Infrastructure.Common.Persistence
                 .ToList();
 
             // store them in the http context for later
-            AddDomainEventsToOfflineProcessingQueue(domainEvents);
+            if (IsUserWaitingOnline())
+            {
+                AddDomainEventsToOfflineProcessingQueue(domainEvents);
+            }
+            else //for testing purposes
+            {
+                await PublishDomainEvents(_publisher, domainEvents);
+            }
+
 
             await base.SaveChangesAsync();
         }
+
+        private static async Task PublishDomainEvents(IPublisher _publisher, List<IDomainEvent> domainEvents)
+        {
+            foreach (var domainEvent in domainEvents)
+            {
+                await _publisher.Publish(domainEvent);
+            }
+        }
+
+        private bool IsUserWaitingOnline() => _httpContextAccessor.HttpContext is not null;
 
         private void AddDomainEventsToOfflineProcessingQueue(List<IDomainEvent> domainEvents)
         {
