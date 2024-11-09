@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GymManagement.Application.U
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GymManagement.Application.SubcutaneousTests", "tests\GymManagement.Application.SubcutaneousTests\GymManagement.Application.SubcutaneousTests.csproj", "{FEA68D4F-7B89-4E26-9B79-C4B19EF978D7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GymManagement.Application.IntegrationTests", "tests\GymManagement.Application.IntegrationTests\GymManagement.Application.IntegrationTests.csproj", "{FF521936-DFEF-422F-A781-1215770BCC88}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -70,6 +72,10 @@ Global
 		{FEA68D4F-7B89-4E26-9B79-C4B19EF978D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FEA68D4F-7B89-4E26-9B79-C4B19EF978D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FEA68D4F-7B89-4E26-9B79-C4B19EF978D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF521936-DFEF-422F-A781-1215770BCC88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF521936-DFEF-422F-A781-1215770BCC88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF521936-DFEF-422F-A781-1215770BCC88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF521936-DFEF-422F-A781-1215770BCC88}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{55E0DD02-F48D-43E6-8883-D91653483C5F} = {C234D3F2-166E-4741-9D3E-FD1D4C8EC3EB}
@@ -81,5 +87,6 @@ Global
 		{ADC8116F-E4F2-482C-8C9E-41D51C686856} = {5FD7FFC6-9ACE-4053-B60E-04BDDC9F1B26}
 		{042F19DD-6342-4AFE-9085-B57E953FF124} = {5FD7FFC6-9ACE-4053-B60E-04BDDC9F1B26}
 		{FEA68D4F-7B89-4E26-9B79-C4B19EF978D7} = {5FD7FFC6-9ACE-4053-B60E-04BDDC9F1B26}
+		{FF521936-DFEF-422F-A781-1215770BCC88} = {5FD7FFC6-9ACE-4053-B60E-04BDDC9F1B26}
 	EndGlobalSection
 EndGlobal
