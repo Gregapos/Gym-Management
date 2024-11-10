@@ -1,0 +1,11 @@
+@host=http://localhost:5183
+@userId=44068464-0f33-4c2e-bfc3-70568374336d
+
+### Admin
+POST {{host}}/users/{{userId}}/profiles/admin
+
+### Trainer
+POST {{host}}/users/{{userId}}/profiles/trainer
+
+### Participant
+POST {{host}}/users/{{userId}}/profiles/participant

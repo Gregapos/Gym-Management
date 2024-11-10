@@ -9,9 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
     builder.Services.AddProblemDetails();
     builder.Services.AddHttpContextAccessor();
 
-    builder.Services.
-        AddApplication()
-        .AddInfrastructure();
+    builder.Services
+        .AddApplication()
+        .AddInfrastructure(builder.Configuration);
 }
 
 var app = builder.Build();
