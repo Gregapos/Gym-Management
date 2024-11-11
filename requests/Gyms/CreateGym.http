@@ -1,8 +1,10 @@
 @host=http://localhost:5183
-@subscriptionId=5795B2BE-5F92-48AB-95B0-60D20AD23269
+@subscriptionId=F1813370-15C8-4471-9DCC-10D15AEEEFCB
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQXBvc3RvbG9zIiwiZmFtaWx5X25hbWUiOiJHcmlnb3JpcyIsImVtYWlsIjoiZ3JlZ2Fwb3NAc2FtcGxlTWFpbC5jb20iLCJpZCI6IjQ0MDY4NDY0LTBmMzMtNGMyZS1iZmMzLTcwNTY4Mzc0MzM2ZCIsInBlcm1pc3Npb25zIjpbImd5bXM6Y3JlYXRlIiwiZ3ltczp1cGRhdGUiXSwiYWRtaW5JZCI6ImM2YjAxZWEzLWFjYTgtNDEzYi04M2JjLTVkNjg4MzU0NmRiZiIsInJvbGVzIjoiQWRtaW4iLCJleHAiOjE3MzEzNjAzOTAsImlzcyI6Ikd5bU1hbmFnZW1lbnQiLCJhdWQiOiJHeW1NYW5hZ2VtZW50In0.ZcZbNR7pM5u5nChMlA8fw6JzcbBvkHphrtk9JbEYaA0
 
 POST {{host}}/subscriptions/{{subscriptionId}}/gyms
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
     "Name": "Amiko's gym"
