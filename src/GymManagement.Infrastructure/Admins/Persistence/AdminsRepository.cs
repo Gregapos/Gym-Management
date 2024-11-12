@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GymManagement.Infrastructure.Admins.Persistence;
 
-public class AdminsRepository : IAdminsRepository
+public class AdminsRepository(GymManagementDbContext dbContext) : IAdminsRepository
 {
-    private readonly GymManagementDbContext _dbContext;
+    private readonly GymManagementDbContext _dbContext = dbContext;
 
-    public AdminsRepository(GymManagementDbContext dbContext)
+    public async Task AddAdminAsync(Admin admin)
     {
-        _dbContext = dbContext;
+        await _dbContext.Admins.AddAsync(admin);
     }
 
     public Task<Admin?> GetByIdAsync(Guid adminId)
